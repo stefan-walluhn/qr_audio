@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, Response, render_template, url_for, request
+from flask import Flask, Response, render_template, url_for
 from qrcode import QRCode
 from qrcode.image.svg import SvgPathImage
 

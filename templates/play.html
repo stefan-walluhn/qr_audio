@@ -1,9 +1,49 @@
 <html>
+  <head>
+    <style>
+      button .btn-text {
+        display: none;
+      }
+
+      button.hide {
+        display: none;
+      }
+
+      button {
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: none;
+        width: 40vw;
+        height: 40vw;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10%;
+        display: block;
+        cursor: pointer;
+      }
+
+      button#play {
+        background-image: url("{{ url_for('static', filename='play-circle-outline.svg') }}");
+      }
+
+      button#pause {
+        background-image: url("{{ url_for('static', filename='pause-circle-outline.svg') }}");
+      }
+    </style>
+    <script>
+      //<![CDATA[
+      function player_play_pause() {
+        for (e of document.getElementsByClassName('play_pause_button')) {
+          e.classList.toggle('hide');
+        }
+      }
+      //]]>
+    </script>
+  </head>
   <body>
-    <audio id="player" src="{{ url_for('static', filename=filename) }}"></audio>
-    <div>
-      <button onclick="document.getElementById('player').play()">Play</button>
-      <button onclick="document.getElementById('player').pause()">Pause</button>
-    </div>
+    <audio id="player" src="{{ url_for('static', filename=filename) }}" onplaying="player_play_pause()" onpause="player_play_pause()" onended="player_play_pause()"></audio>
+    <button id="play" class="play_pause_button" onclick="document.getElementById('player').play()"><span class="btn-text">Play</span></button>
+    <button id="pause" class="play_pause_button hide" onclick="document.getElementById('player').pause()"><span class="btn-text">Pause</span></button>
   </body>
 </html>
