@@ -1,11 +1,14 @@
 import os
 
 from flask import Flask, Response, render_template, url_for
+from werkzeug.middleware.proxy_fix import ProxyFix
+
 from qrcode import QRCode
 from qrcode.image.svg import SvgPathImage
 
 
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
 
 
 @app.route("/play/<slug>")
