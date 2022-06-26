@@ -33,16 +33,20 @@
     </style>
     <script>
       //<![CDATA[
-      function player_play_pause() {
-        for (e of document.getElementsByClassName('play_pause_button')) {
-          e.classList.toggle('hide');
-        }
+      function player_started() {
+        document.getElementById('play').classList.add('hide');
+        document.getElementById('pause').classList.remove('hide');
+      }
+
+      function player_stopped() {
+        document.getElementById('pause').classList.add('hide');
+        document.getElementById('play').classList.remove('hide');
       }
       //]]>
     </script>
   </head>
   <body>
-    <audio id="player" src="{{ url_for('static', filename=filename) }}" onplaying="player_play_pause()" onpause="player_play_pause()" onended="player_play_pause()"></audio>
+    <audio id="player" src="{{ url_for('static', filename=filename) }}" onplaying="player_started()" onpause="player_stopped()" onended="player_stopped()"></audio>
     <button id="play" class="play_pause_button" onclick="document.getElementById('player').play()"><span class="btn-text">Play</span></button>
     <button id="pause" class="play_pause_button hide" onclick="document.getElementById('player').pause()"><span class="btn-text">Pause</span></button>
   </body>
